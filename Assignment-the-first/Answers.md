@@ -17,10 +17,16 @@
     
 ## Part 2
 1. Define the problem
-2. Describe output
-3. Upload your [4 input FASTQ files](../TEST-input_FASTQ) and your [>=6 expected output FASTQ files](../TEST-output_FASTQ).
-4. Pseudocode
-5. High level functions. For each function, be sure to include:
+    
+    We need to de-multiplex fastq files in order to identify the level of index swapping and undetermined index-pairs.
+   
+3. Describe output
+
+    We will output 48 FASTQ files of matching index pairs (read1 and read2 for 24 different index pairs), two FASTQ files with index-hopped reads-pairs, and two FASTQ files for undetermined (non-matching or low quality) index-pairs.
+   
+5. Upload your [4 input FASTQ files](../TEST-input_FASTQ) and your [>=6 expected output FASTQ files](../TEST-output_FASTQ).
+6. Pseudocode
+7. High level functions. For each function, be sure to include:
     1. Description/doc string
     2. Function headers (name and parameters)
     3. Test examples for individual functions
