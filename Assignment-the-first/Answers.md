@@ -5,15 +5,17 @@
 
 | File name | label | Read length | Phred encoding |
 |---|---|---|---|
-| 1294_S1_L008_R1_001.fastq.gz |  |  |  |
-| 1294_S1_L008_R2_001.fastq.gz |  |  |  |
-| 1294_S1_L008_R3_001.fastq.gz |  |  |  |
-| 1294_S1_L008_R4_001.fastq.gz |  |  |  |
+| 1294_S1_L008_R1_001.fastq.gz | forward read | 101 | +33 |
+| 1294_S1_L008_R2_001.fastq.gz | index 1 | 8 | +33 |
+| 1294_S1_L008_R3_001.fastq.gz | index 2 | 8 | +33 |
+| 1294_S1_L008_R4_001.fastq.gz | reverse read | 101 | +33 |
 
 2. Per-base NT distribution
     1. Use markdown to insert your 4 histograms here.
-    2. **YOUR ANSWER HERE**
-    3. **YOUR ANSWER HERE**
+    ![Forward Read plot](./ForwardRead.png)
+    ![Reverse Read plot](./ReverseRead.png)
+    ![Index 1 plot](./Index1.png)
+    ![Index 2 plot](./Index2.png)
     
 ## Part 2
 1. Define the problem
@@ -54,7 +56,7 @@ Still working on these files.
 
 
 def reverse_complement(index_line: str):
-    ```This function will call the check_N() function to first check if there any N's in the index. If it returns False, it will write the reverse complement out.```
+    ```This function will take in the 2nd index records and write the reverse complement.```
     return reverse_comp
 Input: CCGTAATC
 Expected output: GATTACGG
@@ -67,13 +69,6 @@ def edit_header(header_line1: str, header_line2:):
  Input: @test-1 matched-index_R1, @test-1 matched-index_R4, CCGTAATC, CCGTTTAC
 Expected output: @test-1 matched-index_R1_CCGTAATC-CCGTTTAC, @test-1 matched-index_R4_CCGTAATC-CCGTTTAC
 
-
-
-def check_N(index_line1: str, index_line2: str):
-    ```This function will take in the index line from the R2 and R3 files, as a string. It will check to see if there are any N's in the index sequence. This will be used to put sequence records of indexes with N's in a file with unknown indexes.```
-    return True or False
-Input: ATTCGNT
-Expected output: True
 
 
 def is_match(index_line1: str, index_line2: str):
