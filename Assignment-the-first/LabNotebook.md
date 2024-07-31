@@ -74,7 +74,7 @@ The ```#``` and ```-``` indicate a +33 phred encoding.
 ## Questions Continued...
 1. What is a good quality score cutoff for index reads and biological read pairs to utilize for sample identification and downstream analysis, respectively? Justify your answer.
 
-I would suggest a quality score cutoff of 26. This is below the minimum average quality score for any base position in all four fastq files. None of the average qscores for each base position falls below 30, so 26 would allow for qscores less than average but not so far below that it would not be a confident base call. 
+I would suggest a quality score cutoff of 26 for the average of the entire read. This is below the minimum average quality score for any base position in all four fastq files. None of the average qscores for each base position falls below 30, so 26 would allow for qscores less than average but not so far below that it would include a majority of low quality base calls. 
 
 2. How many indexes have undetermined (N) base calls? (Utilize your command line tool knowledge. Submit the command(s) you used. CHALLENGE: use a one-line command)
 
@@ -85,6 +85,7 @@ Count: 3976613
 ```zcat /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R3_001.fastq.gz | awk 'NR == 2 || NR % 4 == 2' | grep "N" | wc -l```
 Count: 3328051
 
+Total: 7304664
 
 
 ## Script for part 1 

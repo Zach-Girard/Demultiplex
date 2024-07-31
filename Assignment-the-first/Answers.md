@@ -17,6 +17,80 @@
     ![Index 1 plot](./Index1.png)
     ![Index 2 plot](./Index2.png)
     
+
+
+# First Assignment Part 1 Questions
+Length of read in 1294_S1_L008_R1_001.fastq.gz:
+
+```zcat /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R1_001.fastq.gz | awk 'NR == 2 || NR % 4 == 2' | head -50 | awk '{ print length }'```
+
+This gives me a charcter length of 101 in each line.
+
+
+Length of read in 1294_S1_L008_R2_001.fastq.gz:
+
+```zcat /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R2_001.fastq.gz | awk 'NR == 2 || NR % 4 == 2' | head -50 | awk '{ print length }'```
+
+This gives me a charcter length of 8 in each line.
+
+
+Length of read in 1294_S1_L008_R3_001.fastq.gz:
+
+
+```zcat /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R3_001.fastq.gz | awk 'NR == 2 || NR % 4 == 2' | head -50 | awk '{ print length }'```
+
+This gives me a charcter length of 8 in each line.
+
+
+Length of read in 1294_S1_L008_R4_001.fastq.gz:
+
+```zcat /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R4_001.fastq.gz | awk 'NR == 2 || NR % 4 == 2' | head -50 | awk '{ print length }'```
+
+This gives me a charcter length of 101 in each line.
+
+
+Phred encoding:
+
+```zcat 1294_S1_L008_R1_001.fastq.gz | head -4 | tail -1```
+```A#A-<FJJJ<JJJJJJJJJJJJJJJJJFJJJJFFJJFJJJAJJJJ-AJJJJJJJFFJJJJJJFFA-7<AJJJFFAJJJJJF<F--JJJJJJF-A-F7JJJJ```
+
+The ```<``` indicates a +33 phred encoding.
+
+
+```zcat 1294_S1_L008_R2_001.fastq.gz | head -4 | tail -1```
+```#AA<FJJJ```
+
+The ```<``` indicates a +33 phred encoding.
+
+
+```zcat 1294_S1_L008_R3_001.fastq.gz | head -4 | tail -1```
+```#AAAAJJF```
+
+The ```#``` indicates a +33 phred encoding.
+
+
+```zcat 1294_S1_L008_R4_001.fastq.gz | head -4 | tail -1```
+```#AAFAFJJ-----F---7-<FA-F<AFFA-JJJ77<FJFJFJJJJJJJJJJAFJFFAJJJJJJJJFJF7-AFFJJ7F7JFJJFJ7FFF--A<A7<-A-7--```
+
+The ```#``` and ```-``` indicate a +33 phred encoding.
+
+1. What is a good quality score cutoff for index reads and biological read pairs to utilize for sample identification and downstream analysis, respectively? Justify your answer.
+
+I would suggest a quality score cutoff of 26 for the average of the entire read. This is below the minimum average quality score for any base position in all four fastq files. None of the average qscores for each base position falls below 30, so 26 would allow for qscores less than average but not so far below that it would include a majority of low quality base calls. 
+
+2. How many indexes have undetermined (N) base calls? (Utilize your command line tool knowledge. Submit the command(s) you used. CHALLENGE: use a one-line command)
+
+
+```zcat /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R2_001.fastq.gz | awk 'NR == 2 || NR % 4 == 2' | grep "N" | wc -l```
+Count: 3976613
+
+```zcat /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R3_001.fastq.gz | awk 'NR == 2 || NR % 4 == 2' | grep "N" | wc -l```
+Count: 3328051
+
+Total: 7304664
+
+
+
 ## Part 2
 1. Define the problem
     
