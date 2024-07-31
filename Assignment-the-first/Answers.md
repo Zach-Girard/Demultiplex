@@ -28,14 +28,6 @@
    
 5. Upload your [4 input FASTQ files](../TEST-input_FASTQ) and your [>=6 expected output FASTQ files](../TEST-output_FASTQ).
 
-Still working on these files.
-    For input files with 3 records, 1 matching, 1 index hopped, and 1 unknown:
-
-    Input files: read1_test.fq, read2_test.fq, read3_test.fq, read4_test.fq
-
-    Output files: match_index_read1.fq, match_index_read4.fq, hopping_index_read1.fq, hopping_index_read4.fq, unknown_index_read1.fq, unknown_index_read4.fq
-
-
 6. Pseudocode
 
 1) Read in all four fastq files (while True loop)
