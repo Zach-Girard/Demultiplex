@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --account=bgmp
-#SBATCH --partition=compute
+#SBATCH --partition=bgmp
 #SBATCH --cpus-per-task=10
 #SBATCH --mem=100GB
 #SBATCH --job-name=Part1
