@@ -257,4 +257,105 @@ sbatch Part1.sh
 Submitted batch job 7794835
 
 
+# Third Assignment: Demultiplexing script
+
+Created a python script ```Demultiplex.py``` and an sbatch script ```Demultiplex.sh``` 
+
+Running python script on test input files
+
+
+```./Demultiplex.py -r1 ../TEST-input_FASTQ/read1_test.fq.gz -r4 ../TEST-input_FASTQ/read4_test.fq.gz -i1 ../TEST-input_FASTQ/read2_test.fq.gz  -i2 ../TEST-input_FASTQ/read3_test.fq.gz -ids /projects/bgmp/shared/2017_sequencing/indexes.txt ```
+
+
+
+```@K00337:83:HJKJNBBXX:8:1101:1265:1191 1:N:0:1 GTAGCGTA-GTAGCGTA
+@K00337:83:HJKJNBBXX:8:1101:1265:1191 4:N:0:1 GTAGCGTA-GTAGCGTA
+@K00337:83:HJKJNBBXX:8:1101:1489:1191 1:N:0:1 GTAGCGTA-TCGGATTC
+@K00337:83:HJKJNBBXX:8:1101:1489:1191 4:N:0:1 GTAGCGTA-TCGGATTC
+@K00337:83:HJKJNBBXX:8:1101:1671:1191 1:N:0:1 TACCGGAT-ATCCGGTN
+@K00337:83:HJKJNBBXX:8:1101:1671:1191 4:N:0:1 TACCGGAT-ATCCGGTN
+@K00337:83:HJKJNBBXX:8:1101:1286:1191 1:N:0:1 AAAAAAAA-TTTTTTTT
+@K00337:83:HJKJNBBXX:8:1101:1286:1191 4:N:0:1 AAAAAAAA-TTTTTTTT
+@K00337:83:HJKJNBBXX:8:1101:1448:1191 1:N:0:1 AGGATAGC-AGGATAGC
+@K00337:83:HJKJNBBXX:8:1101:1448:1191 4:N:0:1 AGGATAGC-AGGATAGC
+ -
+ -
+sample counts are: {'1': 1, '2': 0, '3': 0, '4': 0, '6': 0, '7': 0, '8': 0, '10': 0, '11': 0, '14': 0, '15': 0, '16': 0, '17': 0, '19': 0, '21': 0, '22': 0, '23': 0, '24': 0, '27': 0, '28': 0, '29': 0, '31': 0, '32': 0,'34': 1}
+sample percentages are: {'1': 0.2, '2': 0.0, '3': 0.0, '4': 0.0, '6': 0.0, '7': 0.0, '8': 0.0, '10': 0.0, '11': 0.0, '14': 0.0, '15': 0.0, '16': 0.0, '17': 0.0, '19': 0.0, '21': 0.0, '22': 0.0, '23': 0.0, '24': 0.0, '27': 0.0, '28': 0.0, '29': 0.0, '31': 0.0, '32': 0.0, '34': 0.2}
+index counts are: {'GTAGCGTA': 1, 'CGATCGAT': 0, 'GATCAAGG': 0, 'AACAGCGA': 0, 'TAGCCATG': 0, 'CGGTAATC': 0, 'CTCTGGAT': 0, 'TACCGGAT': 0, 'CTAGCTCA': 0, 'CACTTCAC': 0, 'GCTACTCT': 0, 'ACGATCAG': 0, 'TATGGCAC': 0, 'TGTTCCGT': 0, 'GTCCTAAG': 0, 'TCGACAAG': 0, 'TCTTCGAC': 0, 'ATCATGCG': 0, 'ATCGTGGT': 0, 'TCGAGAGT': 0, 'TCGGATTC': 0, 'GATCTTGC': 0, 'AGAGTCCA': 0, 'AGGATAGC': 1}
+Number of matched indexes: 2
+Number of unknown indexes: 2
+Number of low quality indexes that don't contain N: 0
+Number of hopped indexes: 1
+Total number of records: 5```
+
+
+
+Q score threshold is set to 20
+
+Running sbatch script on actual fq files:
+
+sbatch Demultiplex.sh 
+Submitted batch job 7941864
+
+1 min in, I have 2 x Hopped, 2 x Unknown, and 2 x 24 matched files!
+
+8/7/2024
+Script has been running for over 8 hours, with no failures.
+It's working but obviously needs some optimization.
+Probably due to opening each matched file every time I need to write to a file. I'm going to let the code run overnight, and see if it finishes. 
+Will discuss with others how to avoid this tomorrow. 
+
+Final Output:
+Sample counts are: {'1': 8119243, '2': 5604966, '3': 6587100, '4': 8872034, '6': 10629633, '7': 5064906, '8': 34976387, '10': 76363857, '11': 17332036, '14': 4191388, '15': 7416557, '16': 7942853, '17': 11184304, '19': 15733007, '21': 8830276, '22': 3853350, '23': 42094112, '24': 10087503, '27': 6887592, '28': 11741547, '29': 4611350, '31': 3641072, '32': 11316780, '34': 8673180}
+Sample percentages are: {'1': 0.02235186780137198, '2': 0.015430189620286607, '3': 0.0181339551475941, '4': 0.024424263579409737, '6': 0.02926284526686799, '7': 0.013943431590651461, '8': 0.09628823504772864, '10': 0.2102258592909307, '11': 0.04771422377684964, '14': 0.011538680450906186, '15': 0.020417408569412192, '16': 0.021866274999003087, '17': 0.030789826644966264, '19': 0.043312177327622776, '21': 0.02430930590470414, '22': 0.010608078831045791, '23': 0.11588297414428239, '24': 0.027770388631297677, '27': 0.018961194516999583, '28': 0.03232388860976273, '29': 0.01269481472421218, '31': 0.01002368816886957, '32': 0.03115452641301786, '34': 0.023876828514370542}
+Matched index counts are: {'GTAGCGTA': 8119243, 'CGATCGAT': 5604966, 'GATCAAGG': 6587100, 'AACAGCGA': 8872034, 'TAGCCATG': 10629633, 'CGGTAATC': 5064906, 'CTCTGGAT': 34976387, 'TACCGGAT': 76363857, 'CTAGCTCA': 17332036, 'CACTTCAC': 4191388, 'GCTACTCT': 7416557, 'ACGATCAG': 7942853, 'TATGGCAC': 11184304, 'TGTTCCGT': 15733007, 'GTCCTAAG': 8830276, 'TCGACAAG': 3853350, 'TCTTCGAC': 42094112, 'ATCATGCG': 10087503, 'ATCGTGGT': 6887592, 'TCGAGAGT': 11741547, 'TCGGATTC': 4611350, 'GATCTTGC': 3641072, 'AGAGTCCA': 11316780, 'AGGATAGC': 8673180}
+Number of matched indexes: 331755033
+Number of unknown indexes: 30783962
+Number of low quality indexes that don't contain N: 1044899
+Number of hopped indexes: 7806306
+Total number of records: 363246735
+
+
+I seem to have read every record.
+I need to multiply these percentage by 100. 
+
+Command being timed: "./Demultiplex.py -ids /projects/bgmp/shared/2017_sequencing/indexes.txt -r1 /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R1_001.fastq.gz -r4 /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R4_001.fastq.gz -i1 /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R2_001.fastq.gz -i2 /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R3_001.fastq.gz"
+        User time (seconds): 9750.24
+        System time (seconds): 10696.60
+        Percent of CPU this job got: 53%
+        Elapsed (wall clock) time (h:mm:ss or m:ss): 10:42:39
+        Exit status: 0
+
+
+Job took almost 11 hours to run...
+
+Talked to Lauren who showed me how to loop over an index list to open and close the matched files outside of the main loop.
+Running new version of script
+
+sbatch Demultiplex.sh 
+Submitted batch job 8370024
+Sample counts are: {'1': 8093048, '2': 5590177, '3': 6566013, '4': 8840103, '6': 10599469, '7': 5037387, '8': 34857831, '10': 76119286, '11': 17272877, '14': 4183306, '15': 7382032, '16': 7924413, '17': 11150072, '19': 15695547, '21': 8803030, '22': 3840626, '23': 42006477, '24': 10053967, '27': 6872523, '28': 11698720, '29': 4595129, '31': 3633844, '32': 11279057, '34': 8643481}
+Sample percentages are: {'1': 2.227975428326974, '2': 1.5389476246772047, '3': 1.8075903696698057, '4': 2.433635914167267, '6': 2.9179805291298764, '7': 1.3867673167110506, '8': 9.596185633987874, '10': 20.95525676232162, '11': 4.755136202394221, '14': 1.1516431111211503, '15': 2.0322362980082946, '16': 2.1815510606034767, '17': 3.0695587669907067, '19': 4.32090518308444, '21': 2.423429903643869, '22': 1.0573050298717757, '23': 11.564171939494514, '24': 2.7678065709248565, '27': 1.8919710317561425, '28': 3.2205988031798825, '29': 1.2650159126688365, '31': 1.0003789848241857, '32': 3.1050676890461246, '34': 2.3795068660424437}
+Matched index counts are: {'GTAGCGTA': 8093048, 'CGATCGAT': 5590177, 'GATCAAGG': 6566013, 'AACAGCGA': 8840103, 'TAGCCATG': 10599469, 'CGGTAATC': 5037387, 'CTCTGGAT': 34857831, 'TACCGGAT': 76119286, 'CTAGCTCA': 17272877, 'CACTTCAC': 4183306, 'GCTACTCT': 7382032, 'ACGATCAG': 7924413, 'TATGGCAC': 11150072, 'TGTTCCGT': 15695547, 'GTCCTAAG': 8803030, 'TCGACAAG': 3840626, 'TCTTCGAC': 42006477, 'ATCATGCG': 10053967, 'ATCGTGGT': 6872523, 'TCGAGAGT': 11698720, 'TCGGATTC': 4595129, 'GATCTTGC': 3633844, 'AGAGTCCA': 11279057, 'AGGATAGC': 8643481}
+Number of matched indexes: 330738415
+Percent dual matched: 91.05062293264659
+Number of unknown indexes: 30783962
+Percent unknown: 8.474669978795541
+Number of low quality indexes (mean < 20) that don't contain N: 1044899
+Percent Low Quality: 0.28765544169309604
+Number of hopped indexes: 679459
+Percent Hopped: 0.1870516468647681
+Total number of records: 363246735
+        Command being timed: "./Demultiplex.py -ids /projects/bgmp/shared/2017_sequencing/indexes.txt -r1 /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R1_001.fastq.gz -r4 /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R4_001.fastq.gz -i1 /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R2_001.fastq.gz -i2 /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R3_001.fastq.gz"
+        User time (seconds): 2833.96
+        System time (seconds): 84.37
+        Percent of CPU this job got: 97%
+        Elapsed (wall clock) time (h:mm:ss or m:ss): 50:07.88
+        Exit status: 0
+
+
+My counts match Lauren's!!!
+
+
 
